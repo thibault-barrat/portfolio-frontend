@@ -123,6 +123,7 @@
     width: auto;
     height: auto;
     transform: translateX(0);
+    background: transparent;
   }
   &--open {
     transform: translateX(0);
@@ -197,4 +198,8 @@
       }
     }
   }
+}
+
+.logo {
+  width: 50px;
 }

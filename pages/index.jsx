@@ -1,3 +1,4 @@
+import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
 import styles from '../styles/Home.module.scss';
 import { fetchAPI } from '../utils/api';
@@ -7,9 +8,11 @@ export default function Home({
 }) {
   return (
     <Layout global={global}>
-      <div className={styles.container}>
-        <h1>HomePage</h1>
-      </div>
+      <Hero
+        title={homepage.hero.mainText}
+        image={homepage.hero.picture}
+        typewriterArray={homepage.hero.typewriter}
+      />
     </Layout>
   );
 }

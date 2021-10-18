@@ -1,0 +1,76 @@
+@use "../../styles/vars";
+
+.hero {
+  padding: 100px 0;
+  background-color: vars.$main-bg-color;
+  position: relative;
+  max-height: 100vh;
+  @media screen and (min-width: vars.$breakpoint-md) {
+    padding: 150px 0;
+  }
+  @media screen and (min-width: vars.$breakpoint-lg) {
+    padding: 200px 0;
+  }
+  > div:nth-child(2) {
+    opacity: 0.4;
+    transform-origin: bottom;
+    transform: scale(0.9) translateX(35%);
+    @media screen and (min-width: vars.$breakpoint-xxs) {
+      transform: scale(0.9) translateX(25%);
+    }
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      transform: scale(0.9) translateX(15%);
+      opacity: 1;
+    }
+    @media screen and (min-width: vars.$breakpoint-sm) {
+      transform: scale(0.9) translateX(5%);
+    }
+    @media screen and (min-width: vars.$breakpoint-sm) {
+      transform: scale(0.9);
+    }
+  }
+  img {
+    filter: drop-shadow(0 0 20px #ccc);
+  }
+}
+
+.title {
+  margin: 0;
+  padding-top: 60px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: vars.$title-color;
+  min-height: 260px;
+  z-index: 10;
+  position: relative;
+  @media screen and (min-width: vars.$breakpoint-xxs) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    padding-right: 15%;
+  }
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    padding-right: 30%;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    font-size: 2.7rem;
+    line-height: 3.4rem;
+    min-height: 280px;
+  }
+  @media screen and (min-width: vars.$breakpoint-lg) {
+    font-size: 3rem;
+    line-height: 3.8rem;
+    min-height: 310px;
+  }
+  p {
+    margin: 0;
+    &:last-of-type {
+      display: inline;
+    }
+  }
+}
+
+.typewriter {
+  color: vars.$alt-color;
+}

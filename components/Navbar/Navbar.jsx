@@ -2,8 +2,8 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 import { mediaPropTypes, linkPropTypes } from '../../utils/types';
-import NextImage from '../Image';
 import styles from './Navbar.module.scss';
 
 export default function Navbar({
@@ -16,9 +16,15 @@ export default function Navbar({
   return (
     <header className={styles.header}>
       <div className={styles['header-left']}>
-        <Link href="/" className={styles.logo}>
-          <a>
-            <NextImage width="50" height="50" media={navbar.logo} />
+        <Link href="/">
+          <a className={styles.logo}>
+            <Image
+              src={navbar.logo.url}
+              alt={navbar.logo.alternativeText || ''}
+              width={navbar.logo.width}
+              height={navbar.logo.height}
+              layout="responsive"
+            />
           </a>
         </Link>
         <span hidden id="menu-label">Menu principal</span>

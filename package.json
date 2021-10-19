@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "matter-js": "^0.17.1",
     "next": "11.1.2",
     "next-seo": "^4.28.1",
     "prop-types": "^15.7.2",

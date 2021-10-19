@@ -3,11 +3,13 @@ import Image from 'next/image';
 import Markdown from 'react-markdown';
 import { Typewriter } from 'react-simple-typewriter';
 import { mediaPropTypes } from '../../utils/types';
+import Scene from '../Scene/Scene';
 import styles from './Hero.module.scss';
 
 export default function Hero({ title, image, typewriterArray }) {
   return (
     <section id="home" className={styles.hero}>
+      <Scene />
       <div className="container">
         <h1 className={styles.title}>
           <Markdown>{title}</Markdown>
@@ -37,7 +39,5 @@ export default function Hero({ title, image, typewriterArray }) {
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
   image: mediaPropTypes.isRequired,
-  typewriterArray: PropTypes.arrayOf(
-    PropTypes.string.isRequired,
-  ).isRequired,
+  typewriterArray: PropTypes.string.isRequired,
 };

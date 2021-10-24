@@ -1,5 +1,6 @@
 import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
+import Section from '../components/Section/Section';
 import styles from '../styles/Home.module.scss';
 import { fetchAPI } from '../utils/api';
 
@@ -12,6 +13,31 @@ export default function Home({
         title={homepage.hero.mainText}
         image={homepage.hero.picture}
         typewriterArray={homepage.hero.typewriter}
+      />
+      <Section
+        id="about"
+        title={homepage.about.title}
+        description={homepage.about.description}
+      />
+      <Section
+        id="services"
+        title={homepage.services.title}
+        description={homepage.services.description}
+      />
+      <Section
+        id="projects"
+        title={homepage.projects.title}
+        description={homepage.projects.description}
+      />
+      <Section
+        id="blog"
+        title={homepage.blog.title}
+        description={homepage.blog.description}
+      />
+      <Section
+        id="contact"
+        title={homepage.contact.title}
+        description={homepage.contact.description}
       />
     </Layout>
   );

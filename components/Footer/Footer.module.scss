@@ -1,0 +1,99 @@
+@use "../../styles/vars";
+
+.footer {
+  padding: 30px 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    padding: 30px 50px;
+  }
+
+  > div:nth-child(1) {
+    z-index: -2;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-color: vars.$footer-bg;
+    opacity: 0.6;
+  }
+}
+
+.logo {
+  flex: 0 0 100%;
+  text-align: center;
+  a {
+    width: 180px;
+    display: inline-block;
+    margin-bottom: 20px;
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      margin: 0;
+    }
+  }
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    flex: 0 0 50%;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    flex: 0 0 33.33%;
+    text-align: left;
+  }
+}
+
+.social {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  a {
+    width: 50px;
+    height: 50px;
+    line-height: 44px;
+    font-size: 16px;
+    display: inline-block;
+    border: 2px solid rgba(198, 201, 216, 0.75);
+    color: rgba(198, 201, 216, 0.75);
+    border-radius: 100%;
+    text-align: center;
+    margin: 6px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    &:hover {
+      background: vars.$alt-color;
+      border-color: vars.$alt-color;
+      color: #fff;
+      box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.1);
+      -webkit-transform: translateY(-3px);
+      transform: translateY(-3px);
+    }
+    svg {
+      vertical-align: middle;
+    }
+  }
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    flex: 0 0 50%;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    flex: 0 0 33.33%;
+  }
+}
+
+.copyright {
+  flex: 0 0 100%;
+  margin: 20px 0 0;
+  text-align: center;
+  color: vars.$footer-color;
+  opacity: 0.75;
+  font-weight: 300;
+  @media screen and (min-width: vars.$breakpoint-md) {
+    flex: 0 0 33.33%;
+    text-align: right;
+    margin: 0;
+  }
+}

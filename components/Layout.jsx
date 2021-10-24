@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
-import getStrapiMedia from '../utils/media';
 
 export default function Layout({ children, global }) {
   const {
@@ -12,7 +11,7 @@ export default function Layout({ children, global }) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href={getStrapiMedia(favicon.url)} />
+        <link rel="shortcut icon" href={favicon.url} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <NextSeo
@@ -26,7 +25,7 @@ export default function Layout({ children, global }) {
           // Careful: if you disable image optimization in Strapi, this will break
           ...(metadata.shareImage && {
             images: Object.values(metadata.shareImage.formats).map((image) => ({
-              url: getStrapiMedia(image.url),
+              url: image.url,
               width: image.width,
               height: image.height,
             })),

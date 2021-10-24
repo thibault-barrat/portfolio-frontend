@@ -19,6 +19,22 @@ a {
   box-sizing: border-box;
 }
 
+section {
+  &:nth-child(even) {
+    background-color: vars.$main-bg-color;
+  }
+  &:nth-child(odd) {
+    background-color: vars.$alt-bg-color;
+  }
+  padding: 40px 0 60px;
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    padding: 60px 0 80px;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    padding: 100px 0 120px;
+  }
+}
+
 .container {
   width: 320px;
   padding-right: 15px;

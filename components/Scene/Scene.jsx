@@ -46,6 +46,9 @@ export default function Scene() {
     const constraint = MouseConstraint.create(engine.current, {
       mouse,
     });
+    constraint.mouse.element.removeEventListener('mousewheel', constraint.mouse.mousewheel);
+    constraint.mouse.element.removeEventListener('DOMMouseScroll', constraint.mouse.mousewheel);
+
     world.add(engine.current.world, [
       constraint,
     ]);
@@ -56,7 +59,7 @@ export default function Scene() {
       const body = Bodies.rectangle(Math.random() * cw, 0, 49, 70, {
         friction: 0.01,
         density: 0.0001,
-        angle: Math.random() * 3,
+        angle: (Math.random() * 2) - 1,
         restitution: 0.8,
         frictionAir: 0.2,
         render: {
@@ -108,6 +111,7 @@ export default function Scene() {
     return () => {
       Render.stop(render);
       world.clear(engine.current.world);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       Engine.clear(engine.current);
       render.canvas.remove();
       render.canvas = null;

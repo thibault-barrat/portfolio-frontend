@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
@@ -10,11 +10,28 @@ export default function Navbar({
   navbar, linkedInUrl, twitterUrl, githubUrl,
 }) {
   const [mobileMenuIsShown, setMobileMenuIsShown] = useState(false);
+
   const toggleMenu = () => {
     setMobileMenuIsShown(!mobileMenuIsShown);
   };
+
+  // For the sticky navbar
+  const [isSticky, setIsSticky] = useState(false);
+
+  const handleScroll = () => {
+    setIsSticky(window.pageYOffset > 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles['header-left']}>
         <Link href="/">
           <a className={styles.logo}>

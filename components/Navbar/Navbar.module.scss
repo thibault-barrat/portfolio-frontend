@@ -170,6 +170,9 @@
           @media screen and (min-width: vars.$breakpoint-sm) {
             width: calc(60vw - 100px);
           }
+          @media screen and (min-width: vars.$breakpoint-md) {
+            width: 100%;
+          }
         }
         &::before {
           position: absolute;

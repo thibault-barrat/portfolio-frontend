@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Scrollspy } from '@makotot/ghostui';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
@@ -7,7 +8,7 @@ import { mediaPropTypes, linkPropTypes } from '../../utils/types';
 import styles from './Navbar.module.scss';
 
 export default function Navbar({
-  navbar, linkedInUrl, twitterUrl, githubUrl,
+  navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs,
 }) {
   const [mobileMenuIsShown, setMobileMenuIsShown] = useState(false);
 
@@ -28,7 +29,6 @@ export default function Navbar({
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
@@ -51,15 +51,19 @@ export default function Navbar({
           id="navigation"
         >
           <ul>
-            {navbar.links.map((navLink) => (
-              <li key={navLink.id}>
-                <Link href={navLink.url}>
-                  <a>
-                    {navLink.text}
-                  </a>
-                </Link>
-              </li>
-            ))}
+            <Scrollspy sectionRefs={sectionRefs} offset={-70}>
+              {({ currentElementIndexInViewport }) => (
+                navbar.links.map((navLink, index) => (
+                  <li key={navLink.id}>
+                    <Link href={navLink.url}>
+                      <a className={currentElementIndexInViewport === index ? styles.active : ''}>
+                        {navLink.text}
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              )}
+            </Scrollspy>
           </ul>
         </nav>
       </div>

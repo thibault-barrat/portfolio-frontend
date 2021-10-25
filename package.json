@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@makotot/ghostui": "^2.0.0",
     "matter-js": "^0.17.1",
     "next": "11.1.2",
     "next-seo": "^4.28.1",

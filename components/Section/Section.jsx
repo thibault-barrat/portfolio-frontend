@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import styles from './Section.module.scss';
 
-export default function Section({
+const Section = forwardRef(({
   children, title, description, id,
-}) {
-  return (
-    <section id={id}>
-      <div className="container">
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
-        {children}
-      </div>
-    </section>
-  );
-}
+}, ref) => (
+  <section id={id} ref={ref}>
+    <div className="container">
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
+      {children}
+    </div>
+  </section>
+));
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,
@@ -21,3 +20,7 @@ Section.propTypes = {
   id: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
 };
+
+Section.displayName = 'Section';
+
+export default Section;

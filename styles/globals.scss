@@ -10,6 +10,11 @@ body {
   position: relative;
 }
 
+textarea {
+  font-family: vars.$main-font;
+  resize: vertical;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -57,4 +62,8 @@ section {
   @media screen and (min-width: vars.$breakpoint-lg) {
     width: 1260px;
   }
+}
+
+.nowrap {
+  white-space: nowrap;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import styles from './Section.module.scss';
@@ -8,7 +9,7 @@ const Section = forwardRef(({
   <section id={id} ref={ref}>
     <div className="container">
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
+      <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
       {children}
     </div>
   </section>

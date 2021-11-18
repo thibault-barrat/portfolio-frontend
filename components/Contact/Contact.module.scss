@@ -1,0 +1,110 @@
+@use "../../styles/vars";
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: auto auto auto;
+  margin: 2rem auto 0;
+  @media screen and (min-width: vars.$breakpoint-md) {
+    margin-bottom: 3rem;
+  }
+}
+
+.details-row {
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: vars.$alt-color;
+    .icon {
+      transform: scale(1.2);
+      color: vars.$alt-color;
+    }
+    .link {
+      color: vars.$alt-color;
+    }
+  }
+}
+
+.icon {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  color: vars.$icon-color;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.icon-link {
+  line-height: 0;
+}
+
+.link {
+  color: vars.$text-color;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: vars.$breakpoint-md) {
+    margin: 1rem 0;
+  }
+}
+
+.form {
+  flex: 0 0 100%;
+  padding-top: 1rem;
+  text-align: center;
+  @media screen and (min-width: vars.$breakpoint-md) {
+    flex: 0 0 50%;
+    padding-top: 0;
+  }
+}
+
+.field-container {
+  margin-top: 2rem;
+  position: relative;
+  &--message {
+    margin-top: 0;
+  }
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  height: 50px;
+  line-height: 46px;
+  outline: none;
+  color: vars.$title-color;
+  font-size: 1rem;
+  letter-spacing: 0.1px;
+  &::placeholder {
+    opacity: 1;
+  }
+  &:focus {
+    border-color: vars.$alt-color;
+  }
+  &--textarea {
+    height: 120px;
+  }
+}
+
+.message {
+  margin: 0 auto;
+  font-size: 0.9rem;
+  min-height: 2rem;
+  line-height: 2rem;
+}
+
+.error {
+  color: vars.$alt-color;
+}
+
+.success {
+  color: green;
+}

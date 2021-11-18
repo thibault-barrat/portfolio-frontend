@@ -1,0 +1,68 @@
+@use "../../styles/vars";
+
+.container {
+  margin-top: 30px;
+  color: vars.$text-color;
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    padding: 0 7%;
+  }
+}
+
+.tab-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 -15px;
+  list-style: none;
+  color: vars.$title-color;
+}
+
+.tab {
+  position: relative;
+  margin: 0 15px 10px;
+  display: inline-block;
+  padding-bottom: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  &::before {
+    position: absolute;
+    content: "";
+    width: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+    height: 2px;
+    bottom: 0;
+  }
+  &--selected {
+    color: vars.$alt-color;
+    &::before {
+      width: 100%;
+      background: vars.$alt-color;
+    }
+  }
+}
+
+.tab-panel {
+  font-weight: 300;
+  img {
+    width: 25px;
+    margin: 0 10px;
+  }
+  thead {
+    display: none;
+  }
+  tbody {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: auto auto;
+    @media screen and (min-width: vars.$breakpoint-sm) {
+      grid-template-columns: auto auto auto auto;
+    }
+  }
+  tr {
+    height: 50px;
+  }
+}

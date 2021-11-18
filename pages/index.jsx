@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
 import Section from '../components/Section/Section';
+import CustomTab from '../components/CustomTab/CustomTab';
 import Contact from '../components/Contact/Contact';
 import styles from '../styles/Home.module.scss';
 import { fetchAPI, postAPI } from '../utils/api';
@@ -185,7 +186,9 @@ export default function Home({
         id="about"
         title={homepage.about.title}
         description={homepage.about.description}
-      />
+      >
+        <CustomTab columns={homepage.about.column} />
+      </Section>
       <Section
         ref={sectionRefs[2]}
         id="services"

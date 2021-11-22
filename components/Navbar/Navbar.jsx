@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Scrollspy } from '@makotot/ghostui';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
 import Image from 'next/image';
 import { mediaPropTypes, linkPropTypes } from '../../utils/types';
@@ -15,6 +16,44 @@ export default function Navbar({
   const toggleMenu = () => {
     setMobileMenuIsShown(!mobileMenuIsShown);
   };
+
+  // We need router in order to not use scrollspy when we are not on the home page
+  // and to close the mobile menu when a route change happens
+  const router = useRouter();
+
+  const handleRouteChange = () => {
+    if (mobileMenuIsShown) {
+      setMobileMenuIsShown(false);
+    }
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  });
+
+  // We want to close the navigation menu when the user clicks outside of it
+  // We use a ref to get the DOM node of the menu
+  const menuRef = useRef();
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target) && mobileMenuIsShown) {
+      setMobileMenuIsShown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
 
   // For the sticky navbar
   const [isSticky, setIsSticky] = useState(false);
@@ -30,8 +69,18 @@ export default function Navbar({
     };
   }, []);
 
+  // Function to scroll to an anchor on click
+  const scrollToAnchor = (e, ref) => {
+    e.preventDefault();
+    handleRouteChange();
+    window.scrollTo({
+      top: ref.current.offsetTop - 70,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
+    <header ref={menuRef} className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles['header-left']}>
         <Link href="/">
           <a className={styles.logo}>
@@ -51,19 +100,35 @@ export default function Navbar({
           id="navigation"
         >
           <ul>
-            <Scrollspy sectionRefs={sectionRefs} offset={-70}>
-              {({ currentElementIndexInViewport }) => (
-                navbar.links.map((navLink, index) => (
+            {/* When we are on home page, we use scrollspy
+            and we use standard anchor tag to enable scrollTo feature on the page */}
+            {router.pathname === '/'
+              ? (
+                <Scrollspy sectionRefs={sectionRefs} offset={-70}>
+                  {({ currentElementIndexInViewport }) => (
+                    navbar.links.map((navLink, index) => (
+                      <li key={navLink.id}>
+                        <a
+                          href={navLink.url}
+                          className={currentElementIndexInViewport === index ? styles.active : ''}
+                          onClick={(event) => scrollToAnchor(event, sectionRefs[index])}
+                        >
+                          {navLink.text}
+                        </a>
+                      </li>
+                    ))
+                  )}
+                </Scrollspy>
+              )
+              : (
+                navbar.links.map((navLink) => (
                   <li key={navLink.id}>
                     <Link href={navLink.url}>
-                      <a className={currentElementIndexInViewport === index ? styles.active : ''}>
-                        {navLink.text}
-                      </a>
+                      <a>{navLink.text}</a>
                     </Link>
                   </li>
                 ))
               )}
-            </Scrollspy>
           </ul>
         </nav>
       </div>

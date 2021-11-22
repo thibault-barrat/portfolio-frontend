@@ -6,7 +6,10 @@ import styles from './Section.module.scss';
 const Section = forwardRef(({
   children, title, description, id,
 }, ref) => (
-  <section id={id} ref={ref}>
+  <section ref={ref}>
+    {/* The below span is in absolute position with top set to the height of headers
+    in order to not have the header hiding the content  */}
+    <span className="anchor" id={id} />
     <div className="container">
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />

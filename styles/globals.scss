@@ -25,6 +25,7 @@ a {
 }
 
 section {
+  position: relative;
   &:nth-child(even) {
     background-color: vars.$main-bg-color;
   }
@@ -66,4 +67,9 @@ section {
 
 .nowrap {
   white-space: nowrap;
+}
+
+.anchor {
+  position: absolute;
+  top: -70px;
 }

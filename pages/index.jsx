@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { resetIdCounter } from 'react-tabs';
 import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
 import Section from '../components/Section/Section';
@@ -19,6 +20,11 @@ export default function Home({
     useRef(null),
     useRef(null),
   ];
+
+  // To avoid warning Warning: Prop `id` did not match. Server:
+  // "react-tabs-84" Client: "react-tabs-0"
+  // https://github.com/reactjs/react-tabs#resetidcounter-void
+  resetIdCounter();
 
   // State variables for the controlled fields of the contact form
   const [name, setName] = useState('');

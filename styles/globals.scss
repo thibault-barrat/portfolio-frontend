@@ -10,6 +10,13 @@ body {
   position: relative;
 }
 
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 textarea {
   font-family: vars.$main-font;
   resize: vertical;

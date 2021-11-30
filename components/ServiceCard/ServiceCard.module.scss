@@ -1,0 +1,167 @@
+@use "../../styles/vars";
+
+.card {
+  margin-top: 30px;
+  background: #f6f6f6;
+  padding: 30px 14px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    margin: 30px 15px 0;
+  }
+  &:hover {
+    box-shadow: 0 10px 25px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      &::before {
+        opacity: 1;
+        visibility: visible;
+      }
+      .title,
+      .price,
+      .description {
+        color: #fff;
+      }
+      .price::before,
+      .price::after {
+        background: #fff;
+      }
+      .description ul li::before {
+        border-color: transparent #fff;
+      }
+    }
+  }
+  &::before {
+    opacity: 1;
+    visibility: visible;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(90deg, #f61b10, #ef0963);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: -1;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.content {
+  color: white;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    color: vars.$title-color;
+  }
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    font-size: 22px;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    font-size: 24px;
+  }
+}
+
+.price {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 40px;
+  margin: 1em 0;
+  position: relative;
+  text-align: center;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    color: vars.$title-color;
+  }
+  &::before {
+    content: "";
+    background: white;
+    position: absolute;
+    left: 50%;
+    top: -0.5em;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      background: vars.$title-color;
+    }
+  }
+  &::after {
+    content: "";
+    background: white;
+    position: absolute;
+    left: 50%;
+    bottom: -0.4em;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    @media screen and (min-width: vars.$breakpoint-xs) {
+      background: vars.$title-color;
+    }
+  }
+}
+.price-before {
+  display: block;
+  font-size: 0.4em;
+}
+
+.price-after {
+  font-size: 0.5em;
+  vertical-align: super;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 300;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    color: vars.$text-color;
+  }
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  ul {
+    margin: 0;
+    padding: 0 1em;
+    list-style: none;
+    transform: translateY(0);
+    li {
+      position: relative;
+      &::before {
+        content: "";
+        border-color: transparent white;
+        border-style: solid;
+        border-width: 0.35em 0 0.35em 0.45em;
+        display: block;
+        height: 0;
+        width: 0;
+        left: -1em;
+        top: 0.6em;
+        position: absolute;
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        @media screen and (min-width: vars.$breakpoint-xs) {
+          border-color: transparent vars.$text-color;
+        }
+      }
+    }
+  }
+}

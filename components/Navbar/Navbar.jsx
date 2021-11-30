@@ -9,7 +9,7 @@ import { mediaPropTypes, linkPropTypes } from '../../utils/types';
 import styles from './Navbar.module.scss';
 
 export default function Navbar({
-  navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs,
+  navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs, white,
 }) {
   const [mobileMenuIsShown, setMobileMenuIsShown] = useState(false);
 
@@ -80,17 +80,29 @@ export default function Navbar({
   };
 
   return (
-    <header ref={menuRef} className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
+    <header ref={menuRef} className={`${styles.header} ${white ? styles.white : ''} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles['header-left']}>
         <Link href="/">
           <a className={styles.logo}>
-            <Image
-              src={navbar.logo.url}
-              alt={navbar.logo.alternativeText || ''}
-              width={navbar.logo.width}
-              height={navbar.logo.height}
-              layout="responsive"
-            />
+            {/* We use white logo when Navbar has white props and is not sticky */}
+            {white && !isSticky ? (
+              <Image
+                src={navbar.logo_white.url}
+                alt={navbar.logo_white.alternativeText || ''}
+                width={navbar.logo_white.width}
+                height={navbar.logo_white.height}
+                layout="responsive"
+              />
+            ) : (
+              <Image
+                src={navbar.logo.url}
+                alt={navbar.logo.alternativeText || ''}
+                width={navbar.logo.width}
+                height={navbar.logo.height}
+                layout="responsive"
+              />
+            )}
+
           </a>
         </Link>
         <span hidden id="menu-label">Menu principal</span>
@@ -171,6 +183,8 @@ Navbar.defaultProps = {
   linkedInUrl: '',
   twitterUrl: '',
   githubUrl: '',
+  sectionRefs: [],
+  white: false,
 };
 
 Navbar.propTypes = {
@@ -184,4 +198,6 @@ Navbar.propTypes = {
   linkedInUrl: PropTypes.string,
   twitterUrl: PropTypes.string,
   githubUrl: PropTypes.string,
+  sectionRefs: PropTypes.arrayOf(PropTypes.object),
+  white: PropTypes.bool,
 };

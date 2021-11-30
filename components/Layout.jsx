@@ -4,7 +4,9 @@ import { NextSeo } from 'next-seo';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
-export default function Layout({ children, global, sectionRefs }) {
+export default function Layout({
+  children, global, sectionRefs, whiteNav,
+}) {
   const {
     metadata, navbar, footer, favicon, linkedInUrl, twitterUrl, githubUrl,
   } = global;
@@ -44,6 +46,7 @@ export default function Layout({ children, global, sectionRefs }) {
         twitterUrl={twitterUrl}
         githubUrl={githubUrl}
         sectionRefs={sectionRefs}
+        white={whiteNav}
       />
       {children}
       <Footer

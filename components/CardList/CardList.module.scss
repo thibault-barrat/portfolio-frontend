@@ -1,0 +1,9 @@
+@use "../../styles/vars";
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (min-width: vars.$breakpoint-xs) {
+    margin: 0 -15px;
+  }
+}

@@ -4,6 +4,8 @@ import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
 import Section from '../components/Section/Section';
 import CustomTab from '../components/CustomTab/CustomTab';
+import CardList from '../components/CardList/CardList';
+import ServicesList from '../components/ServicesList/ServicesList';
 import Contact from '../components/Contact/Contact';
 import styles from '../styles/Home.module.scss';
 import { fetchAPI, postAPI } from '../utils/api';
@@ -180,7 +182,7 @@ export default function Home({
   };
 
   return (
-    <Layout global={global} sectionRefs={sectionRefs}>
+    <Layout global={global} sectionRefs={sectionRefs} stickyNav>
       <Hero
         ref={sectionRefs[0]}
         title={homepage.hero.mainText}
@@ -200,13 +202,17 @@ export default function Home({
         id="services"
         title={homepage.services.title}
         description={homepage.services.description}
-      />
+      >
+        <ServicesList services={homepage.services} />
+      </Section>
       <Section
         ref={sectionRefs[3]}
         id="projects"
         title={homepage.projects.title}
         description={homepage.projects.description}
-      />
+      >
+        <CardList items={projects} type="project" />
+      </Section>
       <Section
         ref={sectionRefs[4]}
         id="blog"

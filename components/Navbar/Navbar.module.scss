@@ -36,6 +36,8 @@
   a {
     width: 30px;
     display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
     color: vars.$icon-color;
     opacity: 0.8;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -212,4 +214,26 @@
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
+}
+
+.white:not(.sticky) {
+  .social a {
+    color: #fff;
+    &:hover {
+      color: vars.$alt-color;
+    }
+  }
+  .hamburger:not(.hamburger--open) span {
+    background: #fff;
+  }
+  .menu a {
+    color: #fff;
+    opacity: 0.8;
+    &::before {
+      background: #fff;
+    }
+  }
+  .logo {
+    opacity: 0.8;
+  }
 }

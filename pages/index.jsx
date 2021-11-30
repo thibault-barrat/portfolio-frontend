@@ -159,10 +159,15 @@ export default function Home({
           message,
         });
         // If there is no error, we set the success message to true and loading to false
+        // and reset the form
         setIsContactLoading(false);
         setIsContactSuccess(true);
         setIsContactError(false);
         setIsContactSpam(false);
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
       } catch (error) {
         // If the error is a spam error, we set the spam message to true and loading to false
         if (error.message === 'spam') {
@@ -211,14 +216,16 @@ export default function Home({
         title={homepage.projects.title}
         description={homepage.projects.description}
       >
-        <CardList items={projects} type="project" />
+        <CardList items={projects} type="projects" />
       </Section>
       <Section
         ref={sectionRefs[4]}
         id="blog"
         title={homepage.blog.title}
         description={homepage.blog.description}
-      />
+      >
+        <CardList items={articles} type="blog" />
+      </Section>
       <Section
         ref={sectionRefs[5]}
         id="contact"

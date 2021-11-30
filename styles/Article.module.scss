@@ -1,0 +1,81 @@
+@use "../styles/vars";
+
+.title-container {
+  position: relative;
+  text-align: center;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: #00010c;
+    opacity: 0.5;
+  }
+}
+
+.title {
+  position: relative;
+  font-size: 40px;
+  line-height: 59px;
+  margin: 160px 0 15px;
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  background-clip: text;
+  color: transparent;
+  z-index: 2;
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    margin-top: 180px;
+    font-size: 50px;
+    line-height: 1.4;
+  }
+  @media screen and (min-width: vars.$breakpoint-md) {
+    margin-top: 220px;
+    font-size: 56px;
+  }
+  @media screen and (min-width: vars.$breakpoint-lg) {
+    font-size: 72px;
+  }
+}
+
+.description {
+  position: relative;
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0;
+  color: vars.$footer-color;
+  padding-bottom: 190px;
+  z-index: 2;
+  font-weight: 300;
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    font-size: 22px;
+    line-height: 27px;
+  }
+}
+
+.content {
+  font-weight: 300;
+  color: vars.$title-color;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 16px;
+  line-height: 28px;
+  @media screen and (min-width: vars.$breakpoint-sm) {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+.content-image {
+  max-width: 922px;
+  margin: 0 auto;
+}
+
+.links-container {
+  display: flex;
+justify-content: space-around;
+}

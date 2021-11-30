@@ -1,0 +1,11 @@
+@use "../styles/vars";
+
+.title {
+  margin-top: 120px;
+  color: vars.$title-color;
+  text-align: center;
+}
+
+.container {
+  margin-bottom: 120px;
+}

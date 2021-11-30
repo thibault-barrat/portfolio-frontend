@@ -107,7 +107,7 @@ export default function Contact({
           {isError && <p className={`${styles.message} ${styles.error}`}>Une erreur est survenue, veuillez réessayer</p>}
           {isSpam && <p className={`${styles.message} ${styles.error}`}>Votre message a été détecté comme spam</p>}
           {isSuccess && <p className={`${styles.message} ${styles.success}`}>Votre message a bien été envoyé</p>}
-          {isLoading && <Spinner size={54} />}
+          {isLoading && <Spinner size={48} />}
           {!isLoading && (
             <Button
               type="submit"

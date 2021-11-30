@@ -4,23 +4,23 @@ import Image from 'next/image';
 import { mediaPropTypes } from '../../utils/types';
 import styles from './Card.module.scss';
 
-export default function Card({ project }) {
+export default function Card({ item, type }) {
   return (
     <div className={styles['card-container']}>
-      <Link href={`/projects/${project.slug}`}>
+      <Link href={`/${type}/${item.slug}`}>
         <a className={styles.card}>
           <div className={styles['image-container']}>
             <Image
               className={styles.image}
-              src={project.image.url}
-              alt={project.image.alternativeText || ''}
+              src={item.image.url}
+              alt={item.image.alternativeText || ''}
               layout="fill"
               objectFit="cover"
             />
           </div>
           <div className={styles.content}>
             <div className={styles.tags}>
-              {project.categories.map((category) => (
+              {item.categories.map((category) => (
                 <span
                   key={category.id}
                   className={styles.category}
@@ -30,8 +30,10 @@ export default function Card({ project }) {
                 </span>
               ))}
             </div>
-            <h4 className={styles.title}>{project.title}</h4>
-            <button type="button" className={styles.button}>Voir le projet</button>
+            <h4 className={styles.title}>{item.title}</h4>
+            <button type="button" className={styles.button}>
+              {type === 'projects' ? 'Voir le projet' : 'Lire l\'article'}
+            </button>
           </div>
         </a>
       </Link>
@@ -40,7 +42,7 @@ export default function Card({ project }) {
 }
 
 Card.propTypes = {
-  project: PropTypes.shape({
+  item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -53,4 +55,5 @@ Card.propTypes = {
       }),
     ),
   }).isRequired,
+  type: PropTypes.string.isRequired,
 };

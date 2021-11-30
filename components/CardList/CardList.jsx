@@ -8,8 +8,8 @@ export default function CardList({ items, type }) {
     <div className={styles['card-list']}>
       {/* For projects and articles,
       we reverse the projects array to display the last added project in first */}
-      {type === 'project' && items.reverse().map((project) => (
-        <Card key={project.id} project={project} />
+      {items.reverse().map((item) => (
+        <Card key={item.id} item={item} type={type} />
       ))}
     </div>
   );

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import Markdown from 'react-markdown';
 import styles from './ServiceCard.module.scss';
 
@@ -24,6 +25,11 @@ export default function ServiceCard({ service }) {
         <Markdown className={styles.description}>
           {service.description}
         </Markdown>
+        <Link href="/#contact">
+          <a className={styles.cta}>
+            Demander un devis
+          </a>
+        </Link>
       </div>
     </div>
   );

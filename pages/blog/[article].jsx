@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Moment from 'react-moment';
+import 'moment/locale/fr';
 import CustomMarkdown from '../../components/CustomMarkdown/CustomMarkdown';
 import Layout from '../../components/Layout';
 import { fetchAPI } from '../../utils/api';
@@ -20,7 +22,9 @@ export default function Article({ article, global }) {
           <p className={styles.description}>{article.description}</p>
         </div>
         <div className={styles.date}>
-          <span>{new Date(article.published_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+          <Moment locale="fr" format="Do MMM YYYY">
+            {article.published_at}
+          </Moment>
         </div>
       </div>
       <CustomMarkdown className={`container ${styles.content}`} containerClassName={styles['content-image']}>

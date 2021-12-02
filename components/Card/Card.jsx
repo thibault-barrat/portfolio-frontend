@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Image from 'next/image';
+import Moment from 'react-moment';
+import 'moment/locale/fr';
 import { mediaPropTypes } from '../../utils/types';
 import styles from './Card.module.scss';
 
@@ -36,7 +38,9 @@ export default function Card({ item, type }) {
             </button>
             {type === 'blog' && (
               <div className={styles.date}>
-                <span>{new Date(item.published_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                <Moment locale="fr" format="Do MMM YYYY">
+                  {item.published_at}
+                </Moment>
               </div>
             )}
           </div>

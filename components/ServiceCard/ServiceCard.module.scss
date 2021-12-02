@@ -2,12 +2,14 @@
 
 .card {
   margin-top: 30px;
-  background: #f6f6f6;
   padding: 30px 14px;
   border-radius: 10px;
   position: relative;
   z-index: 2;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @include vars.themed {
+    background: vars.t('service-card-bg');
+  }
   @media screen and (min-width: vars.$breakpoint-sm) {
     margin: 30px 15px 0;
   }
@@ -30,6 +32,9 @@
       }
       .description ul li::before {
         border-color: transparent #fff;
+      }
+      .cta {
+        border-color: #fff;
       }
     }
   }
@@ -67,7 +72,9 @@
   text-align: center;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   @media screen and (min-width: vars.$breakpoint-xs) {
-    color: vars.$title-color;
+    @include vars.themed {
+      color: vars.t('title-color');
+    }
   }
   @media screen and (min-width: vars.$breakpoint-sm) {
     font-size: 22px;
@@ -87,7 +94,9 @@
   transform: translateY(0);
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   @media screen and (min-width: vars.$breakpoint-xs) {
-    color: vars.$title-color;
+    @include vars.themed {
+      color: vars.t('title-color');
+    }
   }
   &::before {
     content: "";
@@ -101,7 +110,9 @@
     z-index: 1;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     @media screen and (min-width: vars.$breakpoint-xs) {
-      background: vars.$title-color;
+      @include vars.themed {
+        background: vars.t('title-color');
+      }
     }
   }
   &::after {
@@ -116,7 +127,9 @@
     z-index: 1;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     @media screen and (min-width: vars.$breakpoint-xs) {
-      background: vars.$title-color;
+      @include vars.themed {
+        background: vars.t('title-color');
+      }
     }
   }
 }
@@ -137,7 +150,9 @@
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   flex-grow: 1;
   @media screen and (min-width: vars.$breakpoint-xs) {
-    color: vars.$text-color;
+    @include vars.themed {
+      color: vars.t('text-color');
+    }
   }
   @media screen and (min-width: vars.$breakpoint-sm) {
     font-size: 18px;
@@ -163,7 +178,10 @@
         position: absolute;
         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         @media screen and (min-width: vars.$breakpoint-xs) {
-          border-color: transparent vars.$text-color;
+          @include vars.themed {
+            border-left-color: vars.t('text-color');
+            border-right-color: vars.t('text-color');
+          }
         }
       }
     }
@@ -194,7 +212,7 @@
     transform: translateY(-5px);
   }
   @media screen and (min-width: vars.$breakpoint-xs) {
-    border-color: #f6f6f6;
+    border-color: vars.$alt-color;
     background-color: vars.$alt-color;
   }
 }

@@ -36,8 +36,10 @@
 .icon {
   margin: 0.5rem;
   font-size: 1.2rem;
-  color: vars.$icon-color;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @include vars.themed {
+    color: vars.t("icon-color");
+  }
 }
 
 .icon-link {
@@ -45,7 +47,9 @@
 }
 
 .link {
-  color: vars.$text-color;
+  @include vars.themed {
+    color: vars.t("text-color");
+  }
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   @media screen and (min-width: vars.$breakpoint-md) {
     margin: 1rem 0;
@@ -74,15 +78,19 @@
   display: block;
   width: 100%;
   padding: 0 20px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: border 0.3s ease;
   height: 50px;
   line-height: 46px;
   outline: none;
-  color: vars.$title-color;
   font-size: 1rem;
   letter-spacing: 0.1px;
+  background-color: transparent;
+  @include vars.themed {
+    color: vars.t('input-color');
+    border-color: vars.t('input-border-color');
+  }
   &::placeholder {
     opacity: 1;
   }

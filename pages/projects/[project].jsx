@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import MarkdownImage from '../../components/MarkdownImage/MarkdownImage';
+import CustomMarkdown from '../../components/CustomMarkdown/CustomMarkdown';
 import Layout from '../../components/Layout';
 import { fetchAPI } from '../../utils/api';
 import styles from '../../styles/Project.module.scss';
@@ -20,9 +20,9 @@ export default function Project({ project, global }) {
           <p className={styles.description}>{project.description}</p>
         </div>
       </div>
-      <MarkdownImage className={`container ${styles.content}`} containerClassName={styles['content-image']}>
+      <CustomMarkdown className={`container ${styles.content}`} containerClassName={styles['content-image']}>
         {project.content}
-      </MarkdownImage>
+      </CustomMarkdown>
       {(project.github || project.lien) && (
         <div className={`container ${styles['links-container']} ${styles.content}`}>
           {project.github && (

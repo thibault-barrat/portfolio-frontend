@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  z-index: 1;
   @media screen and (min-width: vars.$breakpoint-xs) {
     padding: 30px 50px;
   }

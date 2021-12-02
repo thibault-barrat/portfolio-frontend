@@ -11,7 +11,9 @@
 }
 
 .title {
-  color: vars.$title-color;
+  @include vars.themed {
+    color: vars.t("title-color");
+  }
   text-align: center;
 }
 

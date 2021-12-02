@@ -34,6 +34,11 @@ export default function Card({ item, type }) {
             <button type="button" className={styles.button}>
               {type === 'projects' ? 'Voir le projet' : 'Lire l\'article'}
             </button>
+            {type === 'blog' && (
+              <div className={styles.date}>
+                <span>{new Date(item.published_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+              </div>
+            )}
           </div>
         </a>
       </Link>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import MarkdownImage from '../../components/MarkdownImage/MarkdownImage';
+import CustomMarkdown from '../../components/CustomMarkdown/CustomMarkdown';
 import Layout from '../../components/Layout';
 import { fetchAPI } from '../../utils/api';
 import styles from '../../styles/Article.module.scss';
@@ -19,10 +19,13 @@ export default function Article({ article, global }) {
           <h1 className={styles.title}>{article.title}</h1>
           <p className={styles.description}>{article.description}</p>
         </div>
+        <div className={styles.date}>
+          <span>{new Date(article.published_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+        </div>
       </div>
-      <MarkdownImage className={`container ${styles.content}`} containerClassName={styles['content-image']}>
+      <CustomMarkdown className={`container ${styles.content}`} containerClassName={styles['content-image']}>
         {article.content}
-      </MarkdownImage>
+      </CustomMarkdown>
     </Layout>
   );
 }

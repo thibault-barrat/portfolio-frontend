@@ -32,15 +32,42 @@
 }
 
 .social {
-  margin-right: 30px;
+  margin-right: 10px;
   a {
     width: 30px;
     display: inline-block;
     vertical-align: middle;
     line-height: 0;
-    color: vars.$icon-color;
     opacity: 0.8;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    @include vars.themed {
+      color: vars.t("icon-color");
+    }
+    &:hover {
+      color: vars.$alt-color;
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.dark-mode {
+  margin-right: 30px;
+  button {
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
+    opacity: 0.8;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1em;
+    cursor: pointer;
+    @include vars.themed {
+      color: vars.t("icon-color");
+    }
     &:hover {
       color: vars.$alt-color;
       opacity: 1;
@@ -68,13 +95,15 @@
     position: absolute;
     height: 4px;
     width: 100%;
-    background: vars.$icon-color;
     border-radius: 4px;
     opacity: 0.8;
     left: 0;
     transform: rotate(0deg);
     transition: 0.25s ease-in-out;
     transform-origin: left center;
+    @include vars.themed {
+      background: vars.t("icon-color");
+    }
   }
   span:nth-of-type(1) {
     top: 2px;
@@ -104,14 +133,16 @@
 .menu {
   position: absolute;
   top: 0;
-  background: white;
   height: 100vh;
   width: 86vw;
   right: 0;
   z-index: 100;
   padding: 100px 50px 0;
-  transition: all 0.8s cubic-bezier(0.77, 0.2, 0.05, 1);
+  transition: transform 0.8s cubic-bezier(0.77, 0.2, 0.05, 1), color 0s;
   transform: translateX(100%);
+  @include vars.themed {
+    background: vars.t("menu-bg-color");
+  }
   @media screen and (min-width: vars.$breakpoint-xs) {
     width: 68vw;
   }
@@ -125,7 +156,9 @@
     width: auto;
     height: auto;
     transform: translateX(0);
-    background: transparent;
+    @include vars.themed {
+      background: vars.t("menu-bg-color-md");
+    }
   }
   &--open {
     transform: translateX(0);
@@ -151,10 +184,12 @@
         }
       }
       a {
-        color: vars.$title-color;
         width: 100%;
         line-height: normal;
         position: relative;
+        @include vars.themed {
+          color: vars.t("title-color");
+        }
         &::after {
           position: absolute;
           content: "";
@@ -182,11 +217,13 @@
           left: 0;
           width: 100%;
           height: 2px;
-          background: vars.$title-color;
           transition: transform 0.3s;
           bottom: 0;
           transform: scaleX(0);
           transform-origin: right;
+          @include vars.themed {
+            background: vars.t("title-color");
+          }
         }
         &:hover {
           &::before {
@@ -211,9 +248,11 @@
 
 .sticky {
   position: fixed;
-  background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
+  @include vars.themed {
+    background: vars.t("menu-bg-color");
+  }
 }
 
 .white:not(.sticky) {
@@ -223,14 +262,22 @@
       color: vars.$alt-color;
     }
   }
+  .dark-mode button {
+    color: #fff;
+    &:hover {
+      color: vars.$alt-color;
+    }
+  }
   .hamburger:not(.hamburger--open) span {
     background: #fff;
   }
   .menu a {
-    color: #fff;
-    opacity: 0.8;
-    &::before {
-      background: #fff;
+    @media screen and (min-width: vars.$breakpoint-md) {
+      color: #fff;
+      opacity: 0.8;
+      &::before {
+        background: #fff;
+      }
     }
   }
   .logo {

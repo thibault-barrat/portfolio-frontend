@@ -2,7 +2,9 @@
 
 .container {
   margin-top: 30px;
-  color: vars.$text-color;
+  @include vars.themed {
+    color: vars.t('text-color');
+  }
   @media screen and (min-width: vars.$breakpoint-sm) {
     padding: 0 7%;
   }
@@ -15,7 +17,9 @@
   padding: 0;
   margin: 0 -15px;
   list-style: none;
-  color: vars.$title-color;
+  @include vars.themed {
+    color: vars.t('title-color');
+  }
 }
 
 .tab {
@@ -31,7 +35,7 @@
     position: absolute;
     content: "";
     width: 30px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(198,201,216,.75);
     transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0s;
     height: 2px;
     bottom: 0;

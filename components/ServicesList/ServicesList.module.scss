@@ -13,9 +13,10 @@
 }
 
 .conditions {
-  color: vars.$text-color;
   text-align: center;
   font-size: 0.9em;
   font-weight: 300;
-
+  @include vars.themed {
+    color: vars.t("text-color");
+  }
 }

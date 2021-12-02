@@ -44,7 +44,7 @@
   font-size: 16px;
   line-height: 28px;
   margin: 0;
-  color: vars.$footer-color;
+  color: #fff;
   padding-bottom: 190px;
   z-index: 2;
   font-weight: 300;
@@ -56,11 +56,13 @@
 
 .content {
   font-weight: 300;
-  color: vars.$title-color;
   margin-top: 50px;
   margin-bottom: 50px;
   font-size: 16px;
   line-height: 28px;
+  @include vars.themed {
+    color: vars.t("title-color");
+  }
   @media screen and (min-width: vars.$breakpoint-sm) {
     font-size: 18px;
     line-height: 30px;
@@ -77,5 +79,14 @@
 
 .links-container {
   display: flex;
-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.date {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }

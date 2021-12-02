@@ -7,7 +7,6 @@ import CustomTab from '../components/CustomTab/CustomTab';
 import CardList from '../components/CardList/CardList';
 import ServicesList from '../components/ServicesList/ServicesList';
 import Contact from '../components/Contact/Contact';
-import styles from '../styles/Home.module.scss';
 import { fetchAPI, postAPI } from '../utils/api';
 
 export default function Home({
@@ -187,7 +186,11 @@ export default function Home({
   };
 
   return (
-    <Layout global={global} sectionRefs={sectionRefs} stickyNav>
+    <Layout
+      global={global}
+      sectionRefs={sectionRefs}
+      stickyNav
+    >
       <Hero
         ref={sectionRefs[0]}
         title={homepage.hero.mainText}

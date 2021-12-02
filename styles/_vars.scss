@@ -1,9 +1,36 @@
-$main-bg-color: #f8f9fc;
-$alt-bg-color: #fff;
+$themes: (
+  'dark': (
+    main-bg-color: #101010,
+    title-color: #fff,
+    alt-bg-color: #191919,
+    icon-color: #fff,
+    text-color: #E0E3F2,
+    input-color: #C6C9D8,
+    input-border-color: hsla(0,0%,100%,.2),
+    menu-bg-color: #191919,
+    menu-bg-color-md: transparent,
+    service-card-bg: #191919,
+  ),
+  'light': (
+    main-bg-color: #f8f9fc,
+    title-color: #1f1f25,
+    alt-bg-color: #fff,
+    icon-color: #1d1d24,
+    text-color: #717173,
+    input-color: #1f1f25,
+    input-border-color: rgba(0, 0, 0, 0.1),
+    menu-bg-color: #fff,
+    menu-bg-color-md: transparent,
+    service-card-bg: #f6f6f6,
+  ),
+);
+
+//$main-bg-color: #f8f9fc;
+//$alt-bg-color: #fff;
 $title-color: #1f1f25;
 $alt-color: #f9004d;
-$icon-color: #1d1d24;
-$text-color: #717173;
+//$icon-color: #1d1d24;
+//$text-color: #717173;
 $footer-bg: #00010c;
 $footer-color: #c6c9d8;
 $main-font: "Poppins", sans-serif;
@@ -13,3 +40,34 @@ $breakpoint-xxs: 480px;
 $breakpoint-md: 992px;
 $breakpoint-lg: 1200px;
 
+// we create a themed mixin to duplicate rules
+// for dark and light mode
+@mixin themed() {
+  // for each theme defined in $themes
+  @each $theme, $map in $themes {
+    // défine a new matcher .themename current-matcher
+    :global(.#{$theme}) & {
+      // define a global variable with hash of all theme variables
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      // execute the mixin
+      @content;
+      // remove global variable
+      $theme-map: null !global;
+    }
+  }
+}
+
+// new function t who reads the value of the key
+// in the hash defined in the mixin
+@function t($key) {
+  @return map-get($theme-map, $key);
+}

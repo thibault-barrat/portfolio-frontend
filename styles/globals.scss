@@ -10,7 +10,7 @@ body {
   position: relative;
 }
 
-#__next {
+.layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,12 +33,6 @@ a {
 
 section {
   position: relative;
-  &:nth-child(even) {
-    background-color: vars.$main-bg-color;
-  }
-  &:nth-child(odd) {
-    background-color: vars.$alt-bg-color;
-  }
   padding: 40px 0 60px;
   @media screen and (min-width: vars.$breakpoint-sm) {
     padding: 60px 0 80px;
@@ -79,4 +73,31 @@ section {
 .anchor {
   position: absolute;
   top: -70px;
+}
+
+// specific for dark and light theme 
+.dark {
+  background-color: map-get(map-get(vars.$themes, 'dark'), 'alt-bg-color');
+  section {
+    position: relative;
+    &:nth-child(even) {
+      background-color: map-get(map-get(vars.$themes, 'dark'), 'main-bg-color');
+    }
+    &:nth-child(odd) {
+      background-color: map-get(map-get(vars.$themes, 'dark'), 'alt-bg-color');
+    }
+  }
+}
+
+.light {
+  background-color: map-get(map-get(vars.$themes, 'light'), 'alt-bg-color');
+  section {
+    position: relative;
+    &:nth-child(even) {
+      background-color: map-get(map-get(vars.$themes, 'light'), 'main-bg-color');
+    }
+    &:nth-child(odd) {
+      background-color: map-get(map-get(vars.$themes, 'light'), 'alt-bg-color');
+    }
+  }
 }

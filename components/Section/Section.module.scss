@@ -4,7 +4,9 @@
   text-align: center;
   font-size: 36px;
   margin: 0 0 7px;
-  color: vars.$title-color;
+  @include vars.themed {
+    color: vars.t('title-color');
+  }
   @media screen and (min-width: vars.$breakpoint-sm) {
     font-size: 50px;
     margin-bottom: 8px;
@@ -18,7 +20,9 @@
   text-align: center;
   margin: 0;
   font-weight: 300;
-  color: vars.$text-color;
+  @include vars.themed {
+    color: vars.t('text-color');
+  }
   @media screen and (min-width: vars.$breakpoint-sm) {
     font-size: 18px;
     line-height: 30px;

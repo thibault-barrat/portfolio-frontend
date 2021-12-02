@@ -2,8 +2,10 @@
 
 .title {
   margin-top: 120px;
-  color: vars.$title-color;
   text-align: center;
+  @include vars.themed {
+    color: vars.t("title-color");
+  }
 }
 
 .container {

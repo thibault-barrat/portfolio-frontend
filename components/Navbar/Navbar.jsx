@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import {
+  useState, useEffect, useRef, useContext,
+} from 'react';
 import { Scrollspy } from '@makotot/ghostui';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
+import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import Image from 'next/image';
 import { mediaPropTypes, linkPropTypes } from '../../utils/types';
 import styles from './Navbar.module.scss';
+import ThemeContext from '../../contexts/ThemeContext';
 
 export default function Navbar({
   navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs, white,
@@ -16,6 +20,8 @@ export default function Navbar({
   const toggleMenu = () => {
     setMobileMenuIsShown(!mobileMenuIsShown);
   };
+
+  const { isDark, toggleDark } = useContext(ThemeContext);
 
   // We need router in order to not use scrollspy when we are not on the home page
   // and to close the mobile menu when a route change happens
@@ -85,7 +91,7 @@ export default function Navbar({
         <Link href="/">
           <a className={styles.logo}>
             {/* We use white logo when Navbar has white props and is not sticky */}
-            {white && !isSticky ? (
+            {(white && !isSticky) || isDark ? (
               <Image
                 src={navbar.logo_white.url}
                 alt={navbar.logo_white.alternativeText || ''}
@@ -160,6 +166,17 @@ export default function Navbar({
             <a href={githubUrl}>
               <FaGithub />
             </a>
+          )}
+        </div>
+        <div className={styles['dark-mode']}>
+          {isDark ? (
+            <button type="button" onClick={toggleDark}>
+              <MdLightMode />
+            </button>
+          ) : (
+            <button type="button" onClick={toggleDark}>
+              <MdDarkMode />
+            </button>
           )}
         </div>
         <button

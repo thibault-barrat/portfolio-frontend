@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
+import ThemeContext from '../contexts/ThemeContext';
 
 export default function Layout({
   children, global, sectionRefs, whiteNav,
@@ -10,6 +11,7 @@ export default function Layout({
   const {
     metadata, navbar, footer, favicon, linkedInUrl, twitterUrl, githubUrl,
   } = global;
+  const { isDark } = useContext(ThemeContext);
   return (
     <>
       <Head>
@@ -40,21 +42,23 @@ export default function Layout({
           ...(metadata.twitterUsername && { handle: metadata.twitterUsername }),
         }}
       />
-      <Navbar
-        navbar={navbar}
-        linkedInUrl={linkedInUrl}
-        twitterUrl={twitterUrl}
-        githubUrl={githubUrl}
-        sectionRefs={sectionRefs}
-        white={whiteNav}
-      />
-      {children}
-      <Footer
-        footer={footer}
-        linkedInUrl={linkedInUrl}
-        twitterUrl={twitterUrl}
-        githubUrl={githubUrl}
-      />
+      <div className={`layout ${isDark ? 'dark' : 'light'}`}>
+        <Navbar
+          navbar={navbar}
+          linkedInUrl={linkedInUrl}
+          twitterUrl={twitterUrl}
+          githubUrl={githubUrl}
+          sectionRefs={sectionRefs}
+          white={whiteNav}
+        />
+        {children}
+        <Footer
+          footer={footer}
+          linkedInUrl={linkedInUrl}
+          twitterUrl={twitterUrl}
+          githubUrl={githubUrl}
+        />
+      </div>
     </>
   );
 }

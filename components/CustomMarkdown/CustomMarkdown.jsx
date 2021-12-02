@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
-import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula, solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula, solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import ThemeContext from '../../contexts/ThemeContext';
 
-export default function CustomMarkdown({ children, className, containerClassName }) {
+export default function CustomMarkdown({
+  children, className, containerClassName,
+}) {
   const { isDark } = useContext(ThemeContext);
   // this components will convert img from markdown to next/image component
   // https://amirardalan.com/blog/use-next-image-with-react-markdown

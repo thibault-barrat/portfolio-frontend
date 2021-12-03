@@ -18,7 +18,7 @@ export default function Footer({
         objectPosition="50%"
       />
       <div className={styles.logo}>
-        <Link href="/">
+        <Link href="/" scroll={false}>
           <a>
             <Image
               src={footer.logo.url}

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { resetIdCounter } from 'react-tabs';
 import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
@@ -185,6 +185,49 @@ export default function Home({
     }
   };
 
+  // Because of framer motion page transition, we disabled scroll on next Link
+  // so, in _app.jsx we scroll to the top of the page after exit animation
+  // but here, we need to scroll to the ref when there is hash in the url
+  useEffect(() => {
+    const { hash } = window.location;
+    if (hash) {
+      switch (hash) {
+        case '#home':
+          window.scrollTo({
+            top: sectionRefs[0].current.offsetTop - 65,
+          });
+          break;
+        case '#about':
+          window.scrollTo({
+            top: sectionRefs[1].current.offsetTop - 65,
+          });
+          break;
+        case '#services':
+          window.scrollTo({
+            top: sectionRefs[2].current.offsetTop - 65,
+          });
+          break;
+        case '#projects':
+          window.scrollTo({
+            top: sectionRefs[3].current.offsetTop - 65,
+          });
+          break;
+        case '#blog':
+          window.scrollTo({
+            top: sectionRefs[4].current.offsetTop - 65,
+          });
+          break;
+        case '#contact':
+          window.scrollTo({
+            top: sectionRefs[5].current.offsetTop - 65,
+          });
+          break;
+        default:
+          break;
+      }
+    }
+  });
+
   return (
     <Layout
       global={global}
@@ -262,8 +305,8 @@ export default function Home({
 export async function getStaticProps() {
   // Run API calls in parallel
   const [articles, projects, homepage, global] = await Promise.all([
-    fetchAPI('/articles'),
-    fetchAPI('/projects'),
+    fetchAPI('/articles?_sort=id:desc'),
+    fetchAPI('/projects?_sort=id:desc'),
     fetchAPI('/homepage'),
     fetchAPI('/global'),
   ]);

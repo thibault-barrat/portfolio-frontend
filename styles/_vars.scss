@@ -10,6 +10,7 @@ $themes: (
     menu-bg-color: #191919,
     menu-bg-color-md: transparent,
     service-card-bg: #191919,
+    transition-color: #393939,
   ),
   'light': (
     main-bg-color: #f8f9fc,
@@ -22,15 +23,12 @@ $themes: (
     menu-bg-color: #fff,
     menu-bg-color-md: transparent,
     service-card-bg: #f6f6f6,
+    transition-color: #cacbcd,
   ),
 );
 
-//$main-bg-color: #f8f9fc;
-//$alt-bg-color: #fff;
 $title-color: #1f1f25;
 $alt-color: #f9004d;
-//$icon-color: #1d1d24;
-//$text-color: #717173;
 $footer-bg: #00010c;
 $footer-color: #c6c9d8;
 $main-font: "Poppins", sans-serif;

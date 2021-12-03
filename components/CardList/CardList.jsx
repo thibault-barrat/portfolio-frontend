@@ -8,7 +8,7 @@ export default function CardList({ items, type }) {
     <div className={styles['card-list']}>
       {/* For projects and articles,
       we reverse the projects array to display the last added project in first */}
-      {items.reverse().map((item) => (
+      {items.map((item) => (
         <Card key={item.id} item={item} type={type} />
       ))}
     </div>

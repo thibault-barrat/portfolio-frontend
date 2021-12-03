@@ -1,0 +1,25 @@
+@use "../styles/vars";
+
+.transition {
+  @include vars.themed {
+    background: vars.t("transition-color");
+  }
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  bottom: 0;
+  z-index: 1000;
+}
+.transition-child {
+  position: absolute;
+  bottom: -30vh;
+  width: 100%;
+  height: 30vh;
+  background: transparent;
+  border-radius: 100% 100% 0px 0px / 100% 100% 0px 0px;
+  transform-origin: top;
+  @include vars.themed {
+    box-shadow: 0 -15vh 0 0 vars.t("transition-color");
+  }
+}
+

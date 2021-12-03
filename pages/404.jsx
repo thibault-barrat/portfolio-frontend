@@ -8,7 +8,7 @@ export default function Custom404({ global }) {
     <Layout global={global}>
       <div className={`container ${styles.container}`}>
         <h1 className={styles.title}>Erreur 404 - La page demandée n&apos;a pas été trouvée</h1>
-        <Link href="/">
+        <Link href="/" scroll={false}>
           <a className={styles.link}>Retourner à l&apos;accueil</a>
         </Link>
       </div>

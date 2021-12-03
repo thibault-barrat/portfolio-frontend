@@ -72,32 +72,36 @@ section {
 
 .anchor {
   position: absolute;
-  top: -70px;
+  top: -65px;
 }
 
-// specific for dark and light theme 
+// specific for dark and light theme
 .dark {
-  background-color: map-get(map-get(vars.$themes, 'dark'), 'alt-bg-color');
+  background-color: map-get(map-get(vars.$themes, "dark"), "alt-bg-color");
   section {
     position: relative;
     &:nth-child(even) {
-      background-color: map-get(map-get(vars.$themes, 'dark'), 'main-bg-color');
+      background-color: map-get(map-get(vars.$themes, "dark"), "main-bg-color");
     }
     &:nth-child(odd) {
-      background-color: map-get(map-get(vars.$themes, 'dark'), 'alt-bg-color');
+      background-color: map-get(map-get(vars.$themes, "dark"), "alt-bg-color");
     }
   }
 }
 
 .light {
-  background-color: map-get(map-get(vars.$themes, 'light'), 'alt-bg-color');
+  background-color: map-get(map-get(vars.$themes, "light"), "alt-bg-color");
   section {
     position: relative;
     &:nth-child(even) {
-      background-color: map-get(map-get(vars.$themes, 'light'), 'main-bg-color');
+      background-color: map-get(map-get(vars.$themes, "light"), "main-bg-color");
     }
     &:nth-child(odd) {
-      background-color: map-get(map-get(vars.$themes, 'light'), 'alt-bg-color');
+      background-color: map-get(
+        map-get(vars.$themes, "light"),
+        "alt-bg-color"
+      );
     }
   }
 }
+

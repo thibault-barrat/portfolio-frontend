@@ -9,7 +9,7 @@ import styles from './Card.module.scss';
 export default function Card({ item, type }) {
   return (
     <div className={styles['card-container']}>
-      <Link href={`/${type}/${item.slug}`}>
+      <Link href={`/${type}/${item.slug}`} scroll={false}>
         <a className={styles.card}>
           <div className={styles['image-container']}>
             <Image

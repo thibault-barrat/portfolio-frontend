@@ -70,6 +70,7 @@ export default function Navbar({
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -80,7 +81,7 @@ export default function Navbar({
     e.preventDefault();
     handleRouteChange();
     window.scrollTo({
-      top: ref.current.offsetTop - 70,
+      top: ref.current.offsetTop - 65,
       behavior: 'smooth',
     });
   };
@@ -88,7 +89,7 @@ export default function Navbar({
   return (
     <header ref={menuRef} className={`${styles.header} ${white ? styles.white : ''} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles['header-left']}>
-        <Link href="/">
+        <Link href="/" scroll={false}>
           <a className={styles.logo}>
             {/* We use white logo when Navbar has white props and is not sticky */}
             {(white && !isSticky) || isDark ? (
@@ -141,7 +142,7 @@ export default function Navbar({
               : (
                 navbar.links.map((navLink) => (
                   <li key={navLink.id}>
-                    <Link href={navLink.url}>
+                    <Link href={navLink.url} scroll={false}>
                       <a>{navLink.text}</a>
                     </Link>
                   </li>

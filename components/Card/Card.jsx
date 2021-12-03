@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Image from 'next/image';
 import Moment from 'react-moment';
+import { Fade } from 'react-awesome-reveal';
 import 'moment/locale/fr';
 import { mediaPropTypes } from '../../utils/types';
 import styles from './Card.module.scss';
 
 export default function Card({ item, type }) {
   return (
-    <div className={styles['card-container']}>
+    <Fade className={styles['card-container']} direction="up" triggerOnce>
       <Link href={`/${type}/${item.slug}`} scroll={false}>
         <a className={styles.card}>
           <div className={styles['image-container']}>
@@ -46,7 +47,7 @@ export default function Card({ item, type }) {
           </div>
         </a>
       </Link>
-    </div>
+    </Fade>
   );
 }
 

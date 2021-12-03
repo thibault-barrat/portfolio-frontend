@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
+import { Fade } from 'react-awesome-reveal';
 import styles from './ServiceCard.module.scss';
 
 export default function ServiceCard({ service }) {
   return (
-    <div className={styles.card}>
+    <Fade className={styles.card} direction="up" triggerOnce>
       <div className={styles.content}>
         <h4 className={styles.title}>{service.title}</h4>
         {!service.tarif_journalier && (
@@ -31,7 +32,7 @@ export default function ServiceCard({ service }) {
           </a>
         </Link>
       </div>
-    </div>
+    </Fade>
   );
 }
 

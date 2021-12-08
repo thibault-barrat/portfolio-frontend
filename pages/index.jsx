@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { resetIdCounter } from 'react-tabs';
+import { NextSeo } from 'next-seo';
 import Hero from '../components/Hero/Hero';
 import Layout from '../components/Layout';
 import Section from '../components/Section/Section';
@@ -234,6 +235,24 @@ export default function Home({
       sectionRefs={sectionRefs}
       stickyNav
     >
+      <NextSeo
+        title={homepage.seo.title}
+        description={homepage.seo.metaDescription}
+        openGraph={{
+          // Title and description are mandatory
+          title: homepage.seo.title,
+          description: homepage.seo.metaDescription,
+          // Only include OG image if we have it
+          // Careful: if you disable image optimization in Strapi, this will break
+          ...(homepage.seo.shareImage && {
+            images: Object.values(homepage.seo.shareImage.formats).map((image) => ({
+              url: image.url,
+              width: image.width,
+              height: image.height,
+            })),
+          }),
+        }}
+      />
       <Hero
         ref={sectionRefs[0]}
         title={homepage.hero.mainText}

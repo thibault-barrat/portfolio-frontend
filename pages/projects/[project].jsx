@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { NextSeo } from 'next-seo';
 import CustomMarkdown from '../../components/CustomMarkdown/CustomMarkdown';
 import Layout from '../../components/Layout';
 import { fetchAPI } from '../../utils/api';
@@ -7,6 +8,24 @@ import styles from '../../styles/Project.module.scss';
 export default function Project({ project, global }) {
   return (
     <Layout global={global} whiteNav>
+      <NextSeo
+        title={project.title}
+        description={project.description}
+        openGraph={{
+          // Title and description are mandatory
+          title: project.title,
+          description: project.description,
+          // Only include OG image if we have it
+          // Careful: if you disable image optimization in Strapi, this will break
+          ...(project.image && {
+            images: Object.values(project.image.formats).map((image) => ({
+              url: image.url,
+              width: image.width,
+              height: image.height,
+            })),
+          }),
+        }}
+      />
       <div className={styles['title-container']}>
         <Image
           className={styles.image}

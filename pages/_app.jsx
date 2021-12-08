@@ -2,6 +2,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import Router from 'next/router';
+import Script from 'next/script';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import '../styles/globals.scss';
 
@@ -29,41 +30,32 @@ function MyApp({ Component, pageProps, router }) {
   Router.events.on('routeChangeComplete', routeChange);
   Router.events.on('routeChangeStart', routeChange);
 
-  // // function to handle scroll to top or to anchor after page transition
-  // const handleExitComplete = () => {
-  //   if (typeof window !== 'undefined') {
-  //     const { hash } = window.location;
-  //     if (hash) {
-  //       const element = document.getElementById(hash.replace('#', ''));
-  //       if (element) {
-  //         window.scrollTo(0, element.offsetParent.offsetTop);
-  //       }
-  //     } else {
-  //       window.scrollTo(0, 0);
-  //     }
-  //   }
-  //   // const path = router.asPath;
-  //   // if (path.indexOf('#') > -1) {
-  //   //   const hash = path.split('#')[1];
-  //   //   const element = document.getElementById(hash);
-  //   //   if (element) {
-  //   //     element.scrollIntoView();
-  //   //   }
-  //   // } else {
-  //   //   window.scrollTo(0, 0);
-  //   // }
-  // };
-
   return (
-    <ThemeProvider>
-      <AnimatePresence
-        exitBeforeEnter
-        initial={false}
-        onExitComplete={() => window.scrollTo(0, 0)}
-      >
-        <Component key={router.route} {...pageProps} />
-      </AnimatePresence>
-    </ThemeProvider>
+    <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+      />
+
+      <Script id="ga-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+        `}
+      </Script>
+      <ThemeProvider>
+        <AnimatePresence
+          exitBeforeEnter
+          initial={false}
+          onExitComplete={() => window.scrollTo(0, 0)}
+        >
+          <Component key={router.route} {...pageProps} />
+        </AnimatePresence>
+      </ThemeProvider>
+    </>
   );
 }
 

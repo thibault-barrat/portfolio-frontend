@@ -48,6 +48,8 @@ export default function Footer({
         )}
       </div>
       <p className={styles.copyright}>{footer.smallText}</p>
+      {/* eslint-disable-next-line react/no-danger */}
+      <p className={styles.co2} dangerouslySetInnerHTML={{ __html: footer.co2 }} />
     </footer>
   );
 }

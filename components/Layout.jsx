@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
-import { NextSeo } from 'next-seo';
+import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
@@ -11,9 +12,10 @@ export default function Layout({
   children, global, sectionRefs, whiteNav,
 }) {
   const {
-    metadata, navbar, footer, favicon, linkedInUrl, twitterUrl, githubUrl,
+    defaultMeta, navbar, footer, favicon, linkedInUrl, twitterUrl, githubUrl,
   } = global;
   const { isDark } = useContext(ThemeContext);
+  const { asPath } = useRouter();
 
   const variantsDiv = {
     initial: { scaleY: 1 },
@@ -33,28 +35,19 @@ export default function Layout({
         <link rel="shortcut icon" href={favicon.url} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <NextSeo
-        title={metadata.metaTitle}
-        description={metadata.metaDescription}
-        openGraph={{
-          // Title and description are mandatory
-          title: metadata.metaTitle,
-          description: metadata.metaDescription,
-          // Only include OG image if we have it
-          // Careful: if you disable image optimization in Strapi, this will break
-          ...(metadata.shareImage && {
-            images: Object.values(metadata.shareImage.formats).map((image) => ({
-              url: image.url,
-              width: image.width,
-              height: image.height,
-            })),
-          }),
-        }}
+      <DefaultSeo
+        titleTemplate={defaultMeta.titleTemplate}
+        defaultTitle={defaultMeta.defaultTitle}
+        canonical={`https://www.thibault-barrat.com${asPath}`}
         // Only included Twitter data if we have it
         twitter={{
-          ...(metadata.twitterCardType && { cardType: metadata.twitterCardType }),
+          ...(defaultMeta.twitterCardType && { cardType: defaultMeta.twitterCardType }),
           // Handle is the twitter username of the content creator
-          ...(metadata.twitterUsername && { handle: metadata.twitterUsername }),
+          ...(defaultMeta.twitterUsername && { handle: defaultMeta.twitterUsername }),
+        }}
+        openGraph={{
+          url: `https://www.thibault-barrat.com${asPath}`,
+          type: 'website',
         }}
       />
       <div className={`layout ${isDark ? 'dark' : 'light'}`}>

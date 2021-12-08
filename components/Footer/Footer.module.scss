@@ -98,3 +98,15 @@
     margin: 0;
   }
 }
+
+.co2 {
+  flex: 0 0 100%;
+  margin: 20px 0 0;
+  text-align: center;
+  color: vars.$footer-color;
+  opacity: 0.75;
+  font-weight: 300;
+  a {
+    text-decoration: underline;
+  }
+}

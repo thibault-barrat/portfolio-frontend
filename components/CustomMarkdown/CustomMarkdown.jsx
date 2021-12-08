@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+import scss from 'react-syntax-highlighter/dist/cjs/languages/prism/scss';
 import { dracula, solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import ThemeContext from '../../contexts/ThemeContext';
 
@@ -9,6 +14,12 @@ export default function CustomMarkdown({
   children, className, containerClassName,
 }) {
   const { isDark } = useContext(ThemeContext);
+
+  SyntaxHighlighter.registerLanguage('jsx', jsx);
+  SyntaxHighlighter.registerLanguage('javascript', javascript);
+  SyntaxHighlighter.registerLanguage('typescript', typescript);
+  SyntaxHighlighter.registerLanguage('css', css);
+  SyntaxHighlighter.registerLanguage('scss', scss);
   // this components will convert img from markdown to next/image component
   // https://amirardalan.com/blog/use-next-image-with-react-markdown
   const MarkdownComponents = {

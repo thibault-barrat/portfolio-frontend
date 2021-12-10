@@ -15,6 +15,7 @@ import ThemeContext from '../../contexts/ThemeContext';
 export default function Navbar({
   navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs, white,
 }) {
+  console.log(sectionRefs);
   const [mobileMenuIsShown, setMobileMenuIsShown] = useState(false);
 
   const toggleMenu = () => {
@@ -201,7 +202,7 @@ Navbar.defaultProps = {
   linkedInUrl: '',
   twitterUrl: '',
   githubUrl: '',
-  sectionRefs: [],
+  sectionRefs: Array(6).fill(null),
   white: false,
 };
 

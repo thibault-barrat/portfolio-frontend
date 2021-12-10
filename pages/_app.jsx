@@ -24,7 +24,11 @@ function MyApp({ Component, pageProps, router }) {
     tempFix();
   };
   useEffect(() => {
-    router.push(router.asPath);
+    if (router.pathname === '/404') {
+      router.push(router.pathname);
+    } else {
+      router.push(router.asPath);
+    }
   }, []);
 
   Router.events.on('routeChangeComplete', routeChange);

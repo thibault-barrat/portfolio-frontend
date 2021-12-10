@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
-import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import { MdLightMode, MdDarkMode, MdLanguage } from 'react-icons/md';
 import Image from 'next/image';
 import { mediaPropTypes, linkPropTypes } from '../../utils/types';
 import styles from './Navbar.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
 
 export default function Navbar({
-  navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs, white,
+  navbar, linkedInUrl, twitterUrl, githubUrl, sectionRefs, white, frenchPath, englishPath,
 }) {
-  console.log(sectionRefs);
   const [mobileMenuIsShown, setMobileMenuIsShown] = useState(false);
+  const [languageSwitcherIsShown, setLanguageSwitcherIsShown] = useState(false);
 
   const toggleMenu = () => {
     setMobileMenuIsShown(!mobileMenuIsShown);
@@ -27,6 +27,19 @@ export default function Navbar({
   // We need router in order to not use scrollspy when we are not on the home page
   // and to close the mobile menu when a route change happens
   const router = useRouter();
+
+  // Function to handle change of locale
+  const changeLocale = (locale) => {
+    document.cookie = `NEXT_LOCALE=${locale}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+    if (frenchPath && englishPath) {
+      const url = locale === 'fr' ? frenchPath : englishPath;
+      router.push(url, url, { locale });
+    } else {
+      router.push(
+        { pathname: router.pathname, query: router.query }, router.asPath, { locale },
+      );
+    }
+  };
 
   const handleRouteChange = () => {
     if (mobileMenuIsShown) {
@@ -122,7 +135,7 @@ export default function Navbar({
           <ul>
             {/* When we are on home page, we use scrollspy
             and we use standard anchor tag to enable scrollTo feature on the page */}
-            {router.pathname === '/'
+            {router.pathname === '/' && sectionRefs.every((ref) => ref !== null)
               ? (
                 <Scrollspy sectionRefs={sectionRefs} offset={-70}>
                   {({ currentElementIndexInViewport }) => (
@@ -181,6 +194,51 @@ export default function Navbar({
             </button>
           )}
         </div>
+        <div
+          className={styles['lang-switch']}
+          onClick={() => setLanguageSwitcherIsShown(!languageSwitcherIsShown)}
+          onKeyPress={() => setLanguageSwitcherIsShown(!languageSwitcherIsShown)}
+          role="button"
+          tabIndex={0}
+        >
+          <div className={styles['lang-switch__icon']}>
+            <MdLanguage />
+          </div>
+          <span className={styles.locale}>{router.locale === 'fr' ? 'Français' : 'English'}</span>
+          <ul className={languageSwitcherIsShown ? `${styles.languages} ${styles['languages--open']}` : styles.languages}>
+            <li>
+              <button
+                onClick={() => changeLocale('fr')}
+                type="button"
+              >
+                Français
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => changeLocale('en')}
+                type="button"
+              >
+                English
+              </button>
+            </li>
+            {/* <li>
+              <Link href={router.asPath} locale="fr" scroll={false}>
+                <a>
+                  Français
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/en${router.asPath}`} locale="en" scroll={false}>
+                <a>
+                  English
+                </a>
+              </Link>
+            </li> */}
+          </ul>
+        </div>
+
         <button
           className={`${styles.hamburger} ${mobileMenuIsShown ? styles['hamburger--open'] : ''}`}
           type="button"
@@ -204,6 +262,8 @@ Navbar.defaultProps = {
   githubUrl: '',
   sectionRefs: Array(6).fill(null),
   white: false,
+  frenchPath: '',
+  englishPath: '',
 };
 
 Navbar.propTypes = {
@@ -219,4 +279,6 @@ Navbar.propTypes = {
   githubUrl: PropTypes.string,
   sectionRefs: PropTypes.arrayOf(PropTypes.object),
   white: PropTypes.bool,
+  frenchPath: PropTypes.string,
+  englishPath: PropTypes.string,
 };

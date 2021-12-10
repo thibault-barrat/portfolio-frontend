@@ -8,4 +8,8 @@ module.exports = {
     loader: 'default',
     domains: ['res.cloudinary.com'],
   },
+  i18n: {
+    locales: ['fr', 'en'],
+    defaultLocale: 'fr',
+  },
 };

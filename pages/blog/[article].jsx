@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Moment from 'react-moment';
 import 'moment/locale/fr';
 import { NextSeo } from 'next-seo';
@@ -7,12 +8,34 @@ import Layout from '../../components/Layout';
 import { fetchAPI } from '../../utils/api';
 import styles from '../../styles/Article.module.scss';
 
-export default function Article({ article, global }) {
+export default function Article({ articles, article, global }) {
+  const { locale } = useRouter();
+  let frenchPath = '';
+  let englishPath = '';
+
+  // As the article with different languages have different slug, we need to
+  // determine the url for each language for the language switcher
+  if (locale === 'en') {
+    frenchPath = `/blog/${articles.find((p) => p.id === article.localizations[0].id).slug}`;
+    englishPath = `/blog/${article.slug}`;
+  } else {
+    frenchPath = `/blog/${article.slug}`;
+    englishPath = `/blog/${articles.find((p) => p.id === article.localizations[0].id).slug}`;
+  }
+
   return (
-    <Layout global={global} whiteNav>
+    <Layout global={global} whiteNav frenchPath={frenchPath} englishPath={englishPath}>
       <NextSeo
         title={article.title}
         description={article.description}
+        languageAlternates={[{
+          hrefLang: 'fr',
+          href: `https://www.thibault-barrat.com${frenchPath}`,
+        },
+        {
+          hrefLang: 'en',
+          href: `https://www.thibault-barrat.com/en${englishPath}`,
+        }]}
         openGraph={{
           // Title and description are mandatory
           title: article.title,
@@ -52,7 +75,7 @@ export default function Article({ article, global }) {
           <p className={styles.description}>{article.description}</p>
         </div>
         <div className={styles.date}>
-          <Moment locale="fr" format="Do MMM YYYY">
+          <Moment locale={locale} format="Do MMM YYYY">
             {article.published_at}
           </Moment>
         </div>
@@ -66,28 +89,30 @@ export default function Article({ article, global }) {
 
 export async function getStaticProps(context) {
   const slug = context.params.article;
-  const [article, global] = await Promise.all([
-    fetchAPI(`/articles?slug=${slug}`),
-    fetchAPI('/global'),
+  const [articles, global] = await Promise.all([
+    fetchAPI('/articles?_locale=all'),
+    fetchAPI(`/global?_locale=${context.locale}`),
   ]);
 
   // Fetch to projects with slug parameter returns an array of one project
   // so we need to get the first element of the array
   return {
     props: {
-      article: article[0],
+      articles,
+      article: articles.find((article) => article.slug === slug),
       global,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const articles = await fetchAPI('/articles');
+  const articles = await fetchAPI('/articles?_locale=all');
 
   const paths = articles.map((article) => ({
     params: {
       article: article.slug,
     },
+    locale: article.locale,
   }));
 
   return {

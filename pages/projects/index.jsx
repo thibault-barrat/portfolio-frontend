@@ -1,10 +1,12 @@
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import CardList from '../../components/CardList/CardList';
 import { fetchAPI } from '../../utils/api';
 import styles from '../../styles/Projects.module.scss';
 
-export default function index({ projects, global }) {
+export default function Projects({ projects, global }) {
+  const { locale } = useRouter();
   return (
     <Layout global={global}>
       <NextSeo
@@ -25,7 +27,7 @@ export default function index({ projects, global }) {
           }),
         }}
       />
-      <h1 className={styles.title}>Mes projets</h1>
+      <h1 className={styles.title}>{locale === 'fr' ? 'Mes projets' : 'My projects'}</h1>
       <div className={`container ${styles.container}`}>
         <CardList
           items={projects}
@@ -36,11 +38,11 @@ export default function index({ projects, global }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Run API calls in parallel
   const [projects, global] = await Promise.all([
-    fetchAPI('/projects?_sort=id:desc'),
-    fetchAPI('/global'),
+    fetchAPI(`/projects?_sort=id:desc&_locale=${context.locale}`),
+    fetchAPI(`/global?_locale=${context.locale}`),
   ]);
 
   return {

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { FaPhone, FaWhatsapp } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 import Obfuscate from 'react-obfuscate';
@@ -25,6 +26,7 @@ export default function Contact({
   isError,
   isLoading,
 }) {
+  const { locale } = useRouter();
   return (
     <div className={styles.contact}>
       <div className={styles.details}>
@@ -52,25 +54,25 @@ export default function Contact({
       </div>
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         <div className={`${styles['field-container']} ${nameError ? styles['field-container--message'] : ''}`}>
-          {nameError && <p className={`${styles.message} ${styles.error}`}>Le champ ci-dessous est requis</p>}
+          {nameError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Le champ ci-dessous est requis' : 'Below field is required'}</p>}
           <input
             className={styles.input}
             name="name"
             type="text"
-            placeholder="Votre nom"
+            placeholder={locale === 'fr' ? 'Votre nom' : 'Your name'}
             value={nameValue}
             onChange={onChange}
             onBlur={() => checkRequiredField('name')}
           />
         </div>
         <div className={`${styles['field-container']} ${emailError || mailRegexError ? styles['field-container--message'] : ''}`}>
-          {emailError && <p className={`${styles.message} ${styles.error}`}>Le champ ci-dessous est requis</p>}
-          {mailRegexError && <p className={`${styles.message} ${styles.error}`}>Ce champ doit être un email valide</p>}
+          {emailError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Le champ ci-dessous est requis' : 'Below field is required'}</p>}
+          {mailRegexError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Ce champ doit être un email valide' : 'This field must be a valid email'}</p>}
           <input
             className={styles.input}
             name="email"
             type="email"
-            placeholder="Votre email"
+            placeholder={locale === 'fr' ? 'Votre email' : 'Your email'}
             value={emailValue}
             onChange={onChange}
             onBlur={() => {
@@ -80,38 +82,38 @@ export default function Contact({
           />
         </div>
         <div className={`${styles['field-container']} ${subjectError ? styles['field-container--message'] : ''}`}>
-          {subjectError && <p className={`${styles.message} ${styles.error}`}>Le champ ci-dessous est requis</p>}
+          {subjectError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Le champ ci-dessous est requis' : 'Below field is required'}</p>}
           <input
             className={styles.input}
             name="subject"
             type="text"
-            placeholder="L'objet de votre message"
+            placeholder={locale === 'fr' ? 'L\'objet de votre message' : 'Write a subject'}
             value={subjectValue}
             onChange={onChange}
             onBlur={() => checkRequiredField('subject')}
           />
         </div>
         <div className={`${styles['field-container']} ${messageError ? styles['field-container--message'] : ''}`}>
-          {messageError && <p className={`${styles.message} ${styles.error}`}>Le champ ci-dessous est requis</p>}
+          {messageError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Le champ ci-dessous est requis' : 'Below field is required'}</p>}
           <textarea
             className={`${styles.input} ${styles['input--textarea']}`}
             name="message"
             type="text"
-            placeholder="Votre message"
+            placeholder={locale === 'fr' ? 'Votre message' : 'Your message'}
             value={messageValue}
             onChange={onChange}
             onBlur={() => checkRequiredField('message')}
           />
         </div>
         <div className={`${styles['field-container']} ${isError || isSpam || isSuccess ? styles['field-container--message'] : ''}`}>
-          {isError && <p className={`${styles.message} ${styles.error}`}>Une erreur est survenue, veuillez réessayer</p>}
-          {isSpam && <p className={`${styles.message} ${styles.error}`}>Votre message a été détecté comme spam</p>}
-          {isSuccess && <p className={`${styles.message} ${styles.success}`}>Votre message a bien été envoyé</p>}
+          {isError && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Une erreur est survenue, veuillez réessayer' : 'An error has occurred. Please try again'}</p>}
+          {isSpam && <p className={`${styles.message} ${styles.error}`}>{locale === 'fr' ? 'Votre message a été détecté comme spam' : 'Your message has been detected as spam'}</p>}
+          {isSuccess && <p className={`${styles.message} ${styles.success}`}>{locale === 'fr' ? 'Votre message a bien été envoyé' : 'Your message has been sent'}</p>}
           {isLoading && <Spinner size={48} />}
           {!isLoading && (
             <Button
               type="submit"
-              text="Envoyer"
+              text={locale === 'fr' ? 'Envoyer' : 'Submit'}
             />
           )}
         </div>

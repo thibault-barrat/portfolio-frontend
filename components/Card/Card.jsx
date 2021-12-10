@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Moment from 'react-moment';
 import { Fade } from 'react-awesome-reveal';
 import 'moment/locale/fr';
@@ -8,6 +9,7 @@ import { mediaPropTypes } from '../../utils/types';
 import styles from './Card.module.scss';
 
 export default function Card({ item, type }) {
+  const { locale } = useRouter();
   return (
     <Fade className={styles['card-container']} direction="up" triggerOnce>
       <Link href={`/${type}/${item.slug}`} scroll={false}>
@@ -35,11 +37,12 @@ export default function Card({ item, type }) {
             </div>
             <h4 className={styles.title}>{item.title}</h4>
             <button type="button" className={styles.button}>
-              {type === 'projects' ? 'Voir le projet' : 'Lire l\'article'}
+              {type === 'projects' && (locale === 'fr' ? 'Voir le projet' : 'Go to project')}
+              {type === 'blog' && (locale === 'fr' ? 'Lire l\'article' : 'Go to article')}
             </button>
             {type === 'blog' && (
               <div className={styles.date}>
-                <Moment locale="fr" format="Do MMM YYYY">
+                <Moment locale={locale} format="Do MMM YYYY">
                   {item.published_at}
                 </Moment>
               </div>

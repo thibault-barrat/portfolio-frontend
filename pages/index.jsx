@@ -321,13 +321,13 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Run API calls in parallel
   const [articles, projects, homepage, global] = await Promise.all([
-    fetchAPI('/articles?_sort=id:desc'),
-    fetchAPI('/projects?_sort=id:desc'),
-    fetchAPI('/homepage'),
-    fetchAPI('/global'),
+    fetchAPI(`/articles?_sort=id:desc&_locale=${context.locale}`),
+    fetchAPI(`/projects?_sort=id:desc&_locale=${context.locale}`),
+    fetchAPI(`/homepage?_locale=${context.locale}`),
+    fetchAPI(`/global?_locale=${context.locale}`),
   ]);
 
   return {

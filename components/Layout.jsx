@@ -9,13 +9,13 @@ import ThemeContext from '../contexts/ThemeContext';
 import styles from '../styles/Layout.module.scss';
 
 export default function Layout({
-  children, global, sectionRefs, whiteNav,
+  children, global, sectionRefs, whiteNav, frenchPath, englishPath,
 }) {
   const {
     defaultMeta, navbar, footer, favicon, linkedInUrl, twitterUrl, githubUrl,
   } = global;
   const { isDark } = useContext(ThemeContext);
-  const { asPath } = useRouter();
+  const { asPath, locale } = useRouter();
 
   const variantsDiv = {
     initial: { scaleY: 1 },
@@ -38,7 +38,15 @@ export default function Layout({
       <DefaultSeo
         titleTemplate={defaultMeta.titleTemplate}
         defaultTitle={defaultMeta.defaultTitle}
-        canonical={`https://www.thibault-barrat.com${asPath}`}
+        canonical={locale === 'fr' ? `https://www.thibault-barrat.com${asPath}` : `https://www.thibault-barrat.com/en${asPath}`}
+        languageAlternates={[{
+          hrefLang: 'fr',
+          href: `https://www.thibault-barrat.com${asPath}`,
+        },
+        {
+          hrefLang: 'en',
+          href: `https://www.thibault-barrat.com/en${asPath}`,
+        }]}
         // Only included Twitter data if we have it
         twitter={{
           ...(defaultMeta.twitterCardType && { cardType: defaultMeta.twitterCardType }),
@@ -46,8 +54,9 @@ export default function Layout({
           ...(defaultMeta.twitterUsername && { handle: defaultMeta.twitterUsername }),
         }}
         openGraph={{
-          url: `https://www.thibault-barrat.com${asPath}`,
+          url: (locale === 'fr' ? `https://www.thibault-barrat.com${asPath}` : `https://www.thibault-barrat.com/en${asPath}`),
           type: 'website',
+          locale: `${locale}`,
         }}
       />
       <div className={`layout ${isDark ? 'dark' : 'light'}`}>
@@ -58,6 +67,8 @@ export default function Layout({
           githubUrl={githubUrl}
           sectionRefs={sectionRefs}
           white={whiteNav}
+          frenchPath={frenchPath}
+          englishPath={englishPath}
         />
         {children}
         <motion.div

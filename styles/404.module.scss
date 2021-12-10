@@ -30,6 +30,7 @@
   display: inline-block;
   font-weight: 300;
   transition: 0.3s;
+  text-align: center;
   &:hover {
     background: transparent;
     color: vars.$alt-color;

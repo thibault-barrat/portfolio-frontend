@@ -4,7 +4,7 @@ import CardList from '../../components/CardList/CardList';
 import { fetchAPI } from '../../utils/api';
 import styles from '../../styles/Blog.module.scss';
 
-export default function index({ articles, global }) {
+export default function Blog({ articles, global }) {
   return (
     <Layout global={global}>
       <NextSeo
@@ -36,11 +36,11 @@ export default function index({ articles, global }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Run API calls in parallel
   const [articles, global] = await Promise.all([
-    fetchAPI('/articles?_sort=id:desc'),
-    fetchAPI('/global'),
+    fetchAPI(`/articles?_sort=id:desc&_locale=${context.locale}`),
+    fetchAPI(`/global?_locale=${context.locale}`),
   ]);
 
   return {

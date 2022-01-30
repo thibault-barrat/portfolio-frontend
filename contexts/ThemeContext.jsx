@@ -4,7 +4,7 @@ import {
 
 // we define the default context which sould be overridden
 const defaultContext = {
-  toggleDark: () => {},
+  toggleDark: () => { },
   isDark: true,
 };
 
@@ -24,13 +24,14 @@ export const ThemeProvider = ({ children }) => {
     // if the value is defined, we set the state
     if (localDark !== undefined && localDark !== null) {
       setIsDark(localDark);
-    } else if (
-      // we check if user want a light theme from its navigator
-      window.matchMedia
-      && window.matchMedia('(prefers-color-scheme: light)').matches
-    ) {
-      setIsDark(false);
     }
+    // else if (
+    //   // we check if user want a light theme from its navigator
+    //   window.matchMedia
+    //   && window.matchMedia('(prefers-color-scheme: light)').matches
+    // ) {
+    //   setIsDark(false);
+    // }
   }, []);
 
   // we define "better" context than defaultContext

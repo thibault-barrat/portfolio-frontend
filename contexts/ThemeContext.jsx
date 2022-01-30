@@ -5,7 +5,7 @@ import {
 // we define the default context which sould be overridden
 const defaultContext = {
   toggleDark: () => {},
-  isDark: false,
+  isDark: true,
 };
 
 // we create the context from the default context
@@ -14,8 +14,8 @@ const ThemeContext = createContext(defaultContext);
 // we define and export a component which will be used to wrap the app
 // in order to define context with a useState hook
 export const ThemeProvider = ({ children }) => {
-  // theme is light by default
-  const [isDark, setIsDark] = useState(false);
+  // theme is dark by default
+  const [isDark, setIsDark] = useState(true);
 
   // after render of the component, we check the local storage
   useEffect(() => {
@@ -25,11 +25,11 @@ export const ThemeProvider = ({ children }) => {
     if (localDark !== undefined && localDark !== null) {
       setIsDark(localDark);
     } else if (
-      // we check if user want a dark theme from its navigator
+      // we check if user want a light theme from its navigator
       window.matchMedia
-      && window.matchMedia('(prefers-color-scheme: dark)').matches
+      && window.matchMedia('(prefers-color-scheme: light)').matches
     ) {
-      setIsDark(true);
+      setIsDark(false);
     }
   }, []);
 

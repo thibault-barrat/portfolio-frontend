@@ -4,12 +4,10 @@ import Markdown from 'react-markdown';
 import { forwardRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { mediaPropTypes } from '../../utils/types';
-import Scene from '../Scene/Scene';
 import styles from './Hero.module.scss';
 
 const Hero = forwardRef(({ title, image, typewriterArray }, ref) => (
   <section id="home" className={styles.hero} ref={ref}>
-    <Scene />
     <div className="container">
       <h1 className={styles.title}>
         <Markdown>{title}</Markdown>
